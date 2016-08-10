@@ -138,7 +138,6 @@ router.route('/messages/:message_id')
 router.route('/auth/login')
   .post((req,res) => {
     let login = req.body;
-    console.log(login);
     //Find if username exists.
     User
       .where('username', login.username)
@@ -149,8 +148,10 @@ router.route('/auth/login')
           user = user.toJSON();
           bcrypt.compare(login.password, user.password, (err, data) => {
             if (data){
+              console.log('Log true');
               res.send({access_token:'Have you a token.'});
             } else {
+              console.log('False');
               res.send({error:'Passwords do no match.'});
             }
           });
