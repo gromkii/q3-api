@@ -138,7 +138,6 @@ router.route('/messages/:message_id')
 router.route('/auth/login')
   .post((req,res) => {
     let login = req.body;
-
     //Find if username exists.
     User
       .where('username', login.username)
@@ -146,8 +145,9 @@ router.route('/auth/login')
       .then( user => {
         //If username exists, compare the passwords.
         if (user){
-          bcrypt.hashCompare(login.password, user.password, (err, res) => {
-            if (res){
+          user = user.toJSON();
+          bcrypt.compare(login.password, user.password, (err, data) => {
+            if (data){
               res.send({access_token:'Have you a token.'});
             } else {
               res.send({error:'Passwords do no match.'});

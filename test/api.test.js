@@ -134,4 +134,22 @@ describe('API Routes', () => {
   //     done();
   //   })
   // });
+
+  describe('Auth Routes', () => {
+    it('should login', done => {
+      var testUser = {
+        username:'Dax',
+        password:'test'
+      }
+
+      request
+        .post('/api/v1/auth/login')
+        .send(testUser)
+        .expect(200)
+        .end((err, res) => {
+          (res.body).should.have.property('access_token', 'Have you a token.')
+          done();
+        })
+    })
+  })
 });
