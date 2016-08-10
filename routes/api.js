@@ -138,6 +138,7 @@ router.route('/messages/:message_id')
 router.route('/auth/login')
   .post((req,res) => {
     let login = req.body;
+    console.log(login);
     //Find if username exists.
     User
       .where('username', login.username)
