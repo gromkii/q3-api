@@ -8,21 +8,21 @@ exports.seed = function(knex, Promise) {
         knex('users')
           .insert({
             username:'Dax',
-            password:'testing',
+            password:'$2a$04$DJoFC4Ni5JYU1jiPYkbzmOceQ2DcLILOfs3IF4HMNNZUOlpJ1GwZO',
             avatar_url:'http://fillmurray.com/200/200',
             location:'Austin, TX'
           }),
         knex('users')
           .insert({
             username:'Dax2',
-            password:'testing',
+            password:'$2a$04$DJoFC4Ni5JYU1jiPYkbzmOceQ2DcLILOfs3IF4HMNNZUOlpJ1GwZO',
             avatar_url:'http://fillmurray.com/200/200',
             location:'Austin, TX'
           }),
         knex('users')
           .insert({
             username:'Dax3',
-            password:'testing',
+            password:'$2a$04$DJoFC4Ni5JYU1jiPYkbzmOceQ2DcLILOfs3IF4HMNNZUOlpJ1GwZO',
             avatar_url:'http://fillmurray.com/200/200',
             location:'Austin, TX'
           })

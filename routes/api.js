@@ -148,7 +148,7 @@ router.route('/auth/login')
         if (user){
           bcrypt.hashCompare(login.password, user.password, (err, res) => {
             if (res){
-              res.send({token:'Have you a token.'});
+              res.send({access_token:'Have you a token.'});
             } else {
               res.send({error:'Passwords do no match.'});
             }
