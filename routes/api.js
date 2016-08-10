@@ -133,4 +133,33 @@ router.route('/messages/:message_id')
 
   //Delete
 
+// --- Auth Routes --- //
+
+router.route('/auth/login')
+  .post((req,res) => {
+    let login = req.body;
+
+    //Find if username exists.
+    User
+      .where('username', login.username)
+      .fetch()
+      .then( user => {
+        //If username exists, compare the passwords.
+        if (user){
+          bcrypt.hashCompare(login.password, user.password, (err, res) => {
+            if (res){
+              res.send({token:'Have you a token.'});
+            } else {
+              res.send({error:'Passwords do no match.'});
+            }
+          });
+        } else {
+          //If user does not exist, throw error.
+          res.send({error:'User does not exist.'});
+        }
+      })
+
+  })
+
+
 module.exports = router;
