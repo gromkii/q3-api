@@ -81,9 +81,7 @@ describe('API Routes', () => {
         .expect(200)
         .end((err, res) => {
           var listings = res.body;
-          expect(listings.length).to.eq(3);
-          (listings[0]).should.have.property('user_id',1);
-          (listings[0]).should.have.property('item_name', 'Shirt');
+          expect(listings.length).to.eq(7);
           done();
         });
     });
@@ -96,7 +94,7 @@ describe('API Routes', () => {
           var listing = res.body;
 
           (listing).should.have.property('user_id', 1);
-          (listing).should.have.property('item_name', 'Shirt');
+          (listing).should.have.property('item_name', 'BDG shorts');
           done();
         });
     });
@@ -121,9 +119,9 @@ describe('API Routes', () => {
             .end((err, res) => {
               var listings = res.body;
 
-              expect(listings.length).to.eq(4);
-              (listings[3]).should.have.property('user_id', 2);
-              (listings[3]).should.have.property('item_name', 'Nothing');
+              expect(listings.length).to.eq(8);
+              (listings[7]).should.have.property('user_id', 2);
+              (listings[7]).should.have.property('item_name', 'Nothing');
               done();
             });
         });
