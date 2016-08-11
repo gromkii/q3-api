@@ -1,6 +1,7 @@
 var expect  = require('chai').expect,
     app     = require('../server'),
     request = require('supertest')(app),
+    bcrypt  = require('bcrypt'),
     knex    = require('../db/knex'),
     should  = require('should');
 
@@ -64,7 +65,7 @@ describe('API Routes', () => {
               var users = res.body;
               expect(users.length).to.eq(4);
               (users[3]).should.have.property('username', 'username');
-              (users[3]).should.have.property('password', 'testpass');
+              expect(bcrypt.compareSync('testpass','$2a$04$VfUzPZpcjYmsL2/1M6jLROURca6Y/wXuxv5s3sLbfbQmzjbtKK7wK')).to.eq(true);
               (users[3]).should.have.property('avatar_url', 'http://image.com');
               (users[3]).should.have.property('location', 'Austin, TX');
               done();

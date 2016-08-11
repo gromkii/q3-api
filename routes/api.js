@@ -20,11 +20,12 @@ router.route('/users')
   })
   //Add a new user.
   .post((req, res) => {
-    var newUser = req.body;
+    var newUser = req.body,
+        hash    = bcrypt.hashSync(newUser.password, 4);
 
     new User({
       username:newUser.username,
-      password:newUser.password,
+      password:hash,
       avatar_url:newUser.avatar_url,
       location:newUser.location,
     }).save()
