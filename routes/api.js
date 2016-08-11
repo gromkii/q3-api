@@ -57,8 +57,6 @@ router.route('/users/:user_id')
   });
 
   // Delete route
-    //Check authentication.
-
     //If user is admin,
       //Delete user where id = user_id
 
@@ -134,8 +132,14 @@ router.route('/messages')
       })
   })
   .post((req, res) => {
+    var sender  = req.body.sender,
+        message = req.body;
+
     new Message({
-      //Object.
+      sender_id:sender,
+      receiver_id:message.receiver_id,
+      message_title:message.message_title,
+      message_body:message.message_body
     }).save()
       .then( message => {
         res.json(message.toJSON());

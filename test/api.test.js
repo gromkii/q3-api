@@ -151,6 +151,19 @@ describe('API Routes', () => {
     });
   });
 
+  describe('Message Routes', () => {
+    it('should get messages', done => {
+      request
+        .get('/api/v1/messages')
+        .expect(200)
+        .end((err, res) => {
+          var messages = res.body;
+          expect(messages.length).to.eq(3);
+          done();
+        })
+    })
+  })
+
   describe('Auth Routes', () => {
     it('should login', done => {
       var testUser = {
