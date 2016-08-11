@@ -62,6 +62,29 @@ router.route('/users/:user_id')
     //If user is admin,
       //Delete user where id = user_id
 
+router.route('/users/:user_id/listings')
+  .get((req, res) => {
+    User
+      .where('id', req.params.user_id)
+      .fetch({withRelated:['listing']})
+      .then( listings => {
+        res.json(listings.toJSON());
+      })
+  });
+
+router.route('/users/:user_id/messages')
+  .get((req, res) => {
+    Message
+      .where('receiver_id', req.params.user_id)
+      .fetchAll()
+      .then( messages => {
+        res.json(messages.toJSON())
+      })
+  })
+
+
+router.route('/users/:user_id/messages')
+  //Get all messags related to this user.
 
 router.route('/listings')
   //Return all listings.

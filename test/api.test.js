@@ -10,15 +10,15 @@ describe('API Routes', () => {
     knex.migrate.latest().then(() => {
       knex.seed.run().then(() => {
         done();
-      })
-    })
+      });
+    });
   });
 
   after( done => {
     knex.migrate.rollback().then(() => {
       done();
-    })
-  })
+    });
+  });
 
   describe('User Routes', () => {
     it('should return list of all users', done => {
@@ -70,6 +70,29 @@ describe('API Routes', () => {
               (users[3]).should.have.property('location', 'Austin, TX');
               done();
             });
+        });
+    });
+
+    it('should return all listings made by this user', done => {
+      request
+        .get('/api/v1/users/1/listings')
+        .expect(200)
+        .end((err, res) => {
+          var listings = res.body.listing;
+          expect(listings.length).to.eq(4);
+          (listings[0]).should.have.property('item_name', 'BDG shorts');
+          (listings[0]).should.have.property('price', 15);
+          done();
+        });
+    });
+
+    it('should return all messages sent to this user', done => {
+      request
+        .get('/api/v1/users/1/messages')
+        .expect(200)
+        .end((err, res) => {
+
+          done();
         });
     });
   });
@@ -128,12 +151,6 @@ describe('API Routes', () => {
     });
   });
 
-  // describe('Message Routes', () => {
-  //   it('should return messages user 1 has received', done => {
-  //     done();
-  //   })
-  // });
-
   describe('Auth Routes', () => {
     it('should login', done => {
       var testUser = {
@@ -148,7 +165,7 @@ describe('API Routes', () => {
         .end((err, res) => {
           (res.body).should.have.property('access_token', 'Have you a token.')
           done();
-        })
-    })
-  })
+        });
+    });
+  });
 });
