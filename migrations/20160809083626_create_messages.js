@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
       .references('id')
       .inTable('users')
       .onDelete('cascade'),
-    table.integer('reciever_id')
+    table.integer('receiver_id')
       .references('id')
       .inTable('users')
       .onDelete('cascade'),
