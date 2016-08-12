@@ -176,8 +176,13 @@ router.route('/auth/login')
           user = user.toJSON();
           bcrypt.compare(login.password, user.password, (err, data) => {
             if (data){
+
               console.log('Log true');
-              res.send({access_token:'Have you a token.'});
+              res.send({
+                access_token:'Have you a token.',
+                user_id:user.id,
+                username:user.username
+              });
             } else {
               console.log('False');
               res.send({error:'Passwords do no match.'});
